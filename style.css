@@ -99,6 +99,7 @@ a:hover{
 .hamburger-menu{
     position: relative;
     display: inline-block;
+    z-index: 999;
 }
 
 .hamburger-icon{
@@ -441,6 +442,58 @@ article .icon{
 
 .email-icon{
     height: 2.5rem;
+}
+/* Contact Form Styling */
+.contact-form-container {
+    width: 100%;
+    max-width: 500px; /* Keeps form compact on larger screens */
+    margin: 20px auto; /* Centers the form */
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Input Fields */
+.input-group {
+    display: flex;
+    gap: 10px;
+}
+
+.input-group input {
+    flex: 1;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+textarea {
+    height: 120px;
+    resize: none;
+}
+
+/* Submit Button */
+.btn-contact {
+    width: 100%;
+    background: #007bff;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.btn-contact:hover {
+    background: #0056b3;
 }
 
 /* Chatbot Styling */
