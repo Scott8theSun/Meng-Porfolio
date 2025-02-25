@@ -63,6 +63,9 @@ document.addEventListener("DOMContentLoaded", function () {
         if (message.includes("who made you")) 
             return "I was built by Meng Vue, a talented developer who's passionate about web design and programming! 😎";
         
+        if (message.includes("who are you") || message.includes("what are you")) 
+            return "I am Meng's Intern. What can I do for you?";
+        
         return "I'm not sure how to respond to that. I'm just an Intern. Say 'help' to see what I can do.";
     }
 
