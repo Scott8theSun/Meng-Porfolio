@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const jokes = [
                 "Why do programmers prefer dark mode? Because light attracts bugs! 🐞",
                 "Why did the developer go broke? Because he used up all his cache. 💸",
-                "Why do Java developers wear glasses? Because they don’t C#! 🤓"
+                "Why do Java developers wear glasses? Because they don't C#! 🤓"
             ];
             return jokes[Math.floor(Math.random() * jokes.length)];
         }
@@ -114,3 +114,103 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
+// Theme Toggle
+const themeToggle = document.createElement('button');
+themeToggle.className = 'theme-toggle';
+themeToggle.innerHTML = '🌓';
+document.body.appendChild(themeToggle);
+
+themeToggle.addEventListener('click', () => {
+    document.body.dataset.theme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
+    localStorage.setItem('theme', document.body.dataset.theme);
+});
+
+// Load saved theme
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme) {
+    document.body.dataset.theme = savedTheme;
+}
+
+// Particle Background
+particlesJS('particles-js', {
+    particles: {
+        number: { value: 80, density: { enable: true, value_area: 800 } },
+        color: { value: '#0984e3' },
+        shape: { type: 'circle' },
+        opacity: { value: 0.5, random: false },
+        size: { value: 3, random: true },
+        line_linked: {
+            enable: true,
+            distance: 150,
+            color: '#0984e3',
+            opacity: 0.4,
+            width: 1
+        },
+        move: {
+            enable: true,
+            speed: 6,
+            direction: 'none',
+            random: false,
+            straight: false,
+            out_mode: 'out',
+            bounce: false
+        }
+    },
+    interactivity: {
+        detect_on: 'canvas',
+        events: {
+            onhover: { enable: true, mode: 'repulse' },
+            onclick: { enable: true, mode: 'push' },
+            resize: true
+        }
+    },
+    retina_detect: true
+});
+
+// Enhanced Scroll Animations
+const scrollObserverOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const scrollObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            if (entry.target.classList.contains('skill-bar')) {
+                const progress = entry.target.querySelector('.skill-progress');
+                const targetWidth = entry.target.dataset.progress;
+                progress.style.width = targetWidth;
+            }
+        }
+    });
+}, scrollObserverOptions);
+
+document.querySelectorAll('.reveal, .skill-bar').forEach(el => scrollObserver.observe(el));
+
+// Typing Animation for Introduction
+const introText = document.querySelector('.section__text__p1');
+const text = introText.textContent;
+introText.textContent = '';
+let i = 0;
+
+function typeWriter() {
+    if (i < text.length) {
+        introText.textContent += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 100);
+    }
+}
+
+// Start typing animation when section is visible
+const introObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            typeWriter();
+            introObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.5 });
+
+introObserver.observe(document.querySelector('#profile'));
